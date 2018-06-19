@@ -1,0 +1,280 @@
+﻿type Bichinho implements Node {
+  emoji: String
+  id: ID!
+  name: String
+}
+
+# A connection to a list of items.
+type BichinhoConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [BichinhoEdge]
+
+  # Count of filtered result set without considering pagination arguments
+  count: Int!
+}
+
+# An edge in a connection.
+type BichinhoEdge {
+  # The item at the end of the edge.
+  node: Bichinho!
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+input BichinhoFilter {
+  # Logical AND on all given filters.
+  AND: [BichinhoFilter!]
+
+  # Logical OR on all given filters.
+  OR: [BichinhoFilter!]
+  emoji: String
+
+  # All values that are not equal to given value.
+  emoji_not: String
+
+  # All values that are contained in given list.
+  emoji_in: [String!]
+
+  # All values that are not contained in given list.
+  emoji_not_in: [String!]
+
+  # All values less than the given value.
+  emoji_lt: String
+
+  # All values less than or equal the given value.
+  emoji_lte: String
+
+  # All values greater than the given value.
+  emoji_gt: String
+
+  # All values greater than or equal the given value.
+  emoji_gte: String
+
+  # All values containing the given string.
+  emoji_contains: String
+
+  # All values not containing the given string.
+  emoji_not_contains: String
+
+  # All values starting with the given string.
+  emoji_starts_with: String
+
+  # All values not starting with the given string.
+  emoji_not_starts_with: String
+
+  # All values ending with the given string.
+  emoji_ends_with: String
+
+  # All values not ending with the given string.
+  emoji_not_ends_with: String
+  id: ID
+
+  # All values that are not equal to given value.
+  id_not: ID
+
+  # All values that are contained in given list.
+  id_in: [ID!]
+
+  # All values that are not contained in given list.
+  id_not_in: [ID!]
+
+  # All values less than the given value.
+  id_lt: ID
+
+  # All values less than or equal the given value.
+  id_lte: ID
+
+  # All values greater than the given value.
+  id_gt: ID
+
+  # All values greater than or equal the given value.
+  id_gte: ID
+
+  # All values containing the given string.
+  id_contains: ID
+
+  # All values not containing the given string.
+  id_not_contains: ID
+
+  # All values starting with the given string.
+  id_starts_with: ID
+
+  # All values not starting with the given string.
+  id_not_starts_with: ID
+
+  # All values ending with the given string.
+  id_ends_with: ID
+
+  # All values not ending with the given string.
+  id_not_ends_with: ID
+  name: String
+
+  # All values that are not equal to given value.
+  name_not: String
+
+  # All values that are contained in given list.
+  name_in: [String!]
+
+  # All values that are not contained in given list.
+  name_not_in: [String!]
+
+  # All values less than the given value.
+  name_lt: String
+
+  # All values less than or equal the given value.
+  name_lte: String
+
+  # All values greater than the given value.
+  name_gt: String
+
+  # All values greater than or equal the given value.
+  name_gte: String
+
+  # All values containing the given string.
+  name_contains: String
+
+  # All values not containing the given string.
+  name_not_contains: String
+
+  # All values starting with the given string.
+  name_starts_with: String
+
+  # All values not starting with the given string.
+  name_not_starts_with: String
+
+  # All values ending with the given string.
+  name_ends_with: String
+
+  # All values not ending with the given string.
+  name_not_ends_with: String
+}
+
+enum BichinhoOrderBy {
+  emoji_ASC
+  emoji_DESC
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+}
+
+input CreateBichinho {
+  emoji: String
+  name: String
+}
+
+input CreateBichinhoInput {
+  emoji: String
+  name: String
+  clientMutationId: String!
+}
+
+type CreateBichinhoPayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  bichinho: Bichinho
+  edge: BichinhoEdge
+}
+
+input DeleteBichinhoInput {
+  id: ID!
+  clientMutationId: String!
+}
+
+type DeleteBichinhoPayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  bichinho: Bichinho
+  edge: BichinhoEdge
+  deletedId: ID
+}
+
+# HelloPayload
+type HelloPayload {
+  message: String!
+}
+
+type Mutation {
+  createBichinho(input: CreateBichinhoInput!): CreateBichinhoPayload
+  updateBichinho(input: UpdateBichinhoInput!): UpdateBichinhoPayload
+  updateOrCreateBichinho(input: UpdateOrCreateBichinhoInput!): UpdateOrCreateBichinhoPayload
+  deleteBichinho(input: DeleteBichinhoInput!): DeleteBichinhoPayload
+}
+
+# An object with an ID
+interface Node {
+  # The id of the object.
+  id: ID!
+}
+
+# Information about pagination in a connection.
+type PageInfo {
+  # When paginating forwards, are there more items?
+  hasNextPage: Boolean!
+
+  # When paginating backwards, are there more items?
+  hasPreviousPage: Boolean!
+
+  # When paginating backwards, the cursor to continue.
+  startCursor: String
+
+  # When paginating forwards, the cursor to continue.
+  endCursor: String
+}
+
+type Query {
+  viewer: Viewer!
+
+  # Fetches an object given its ID
+  node(
+    # The ID of an object
+    id: ID!
+  ): Node
+}
+
+input UpdateBichinho {
+  emoji: String
+  id: ID!
+  name: String
+}
+
+input UpdateBichinhoInput {
+  emoji: String
+  id: ID!
+  name: String
+  clientMutationId: String!
+}
+
+type UpdateBichinhoPayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  bichinho: Bichinho
+  edge: BichinhoEdge
+}
+
+input UpdateOrCreateBichinhoInput {
+  update: UpdateBichinho!
+  create: CreateBichinho!
+  clientMutationId: String!
+}
+
+type UpdateOrCreateBichinhoPayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  bichinho: Bichinho
+  edge: BichinhoEdge
+}
+
+# This is the famous Relay viewer object
+type Viewer {
+  allBichinhoes(filter: BichinhoFilter, orderBy: BichinhoOrderBy, skip: Int, after: String, before: String, first: Int, last: Int): BichinhoConnection!
+  Bichinho(id: ID): Bichinho
+
+  # hello
+  hello(name: String): HelloPayload
+  id: ID!
+}
